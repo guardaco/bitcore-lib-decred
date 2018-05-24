@@ -83,6 +83,7 @@
     "bn.js": "=2.0.4",
     "bs58": "=2.0.0",
     "buffer-compare": "=1.0.0",
+    "crypto-browserify-decred": "git+https://github.com/oxfn/crypto-browserify-decred.git#master-legacy",
     "crypto-decred": "git+https://github.com/oxfn/crypto-js-decred.git",
     "elliptic": "=3.0.3",
     "inherits": "=2.0.1",
@@ -92,7 +93,6 @@
     "bitcore-build": "bitpay/bitcore-build",
     "brfs": "^1.2.0",
     "chai": "^1.10.0",
-    "crypto-browserify-decred": "git+https://github.com/oxfn/crypto-browserify-decred.git#master-legacy",
     "gulp": "^3.8.10",
     "sinon": "^1.13.0"
   },
