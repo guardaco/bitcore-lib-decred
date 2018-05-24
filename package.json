@@ -92,7 +92,7 @@
     "bitcore-build": "bitpay/bitcore-build",
     "brfs": "^1.2.0",
     "chai": "^1.10.0",
-    "crypto-browserify": "git+https://github.com/oxfn/crypto-browserify-decred.git#master-legacy",
+    "crypto-browserify-decred": "git+https://github.com/oxfn/crypto-browserify-decred.git#master-legacy",
     "gulp": "^3.8.10",
     "sinon": "^1.13.0"
   },
