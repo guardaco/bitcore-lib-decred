@@ -1,5 +1,3 @@
-(function (module, exports) {
-
 'use strict';
 
 // Utils
@@ -2283,4 +2281,3 @@ Mont.prototype.invm = function invm(a) {
   return res._forceRed(this);
 };
 
-})(typeof module === 'undefined' || module, this);
