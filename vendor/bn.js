@@ -1717,7 +1717,7 @@ BN.prototype.ucmp = function ucmp(num) {
 // on the `m` itself.
 //
 BN.red = function red(num) {
-  return new Redd(num);
+  return new Red(num);
 };
 
 BN.prototype.toRed = function toRed(ctx) {
@@ -2007,7 +2007,7 @@ BN._prime = function prime(name) {
 //
 // Base reduction engine
 //
-function Redd(m) {
+function Red(m) {
   if (typeof m === 'string') {
     var prime = BN._prime(m);
     this.m = prime.p;
@@ -2018,30 +2018,30 @@ function Redd(m) {
   }
 }
 
-Redd.prototype._verify1 = function _verify1(a) {
+Red.prototype._verify1 = function _verify1(a) {
   assert(!a.sign, 'red works only with positives');
   assert(a.red, 'red works only with red numbers');
 };
 
-Redd.prototype._verify2 = function _verify2(a, b) {
+Red.prototype._verify2 = function _verify2(a, b) {
   assert(!a.sign && !b.sign, 'red works only with positives');
   assert(a.red && a.red === b.red,
          'red works only with red numbers');
 };
 
-Redd.prototype.imod = function imod(a) {
+Red.prototype.imod = function imod(a) {
   if (this.prime)
     return this.prime.ireduce(a)._forceRed(this);
   return a.mod(this.m)._forceRed(this);
 };
 
-Redd.prototype.neg = function neg(a) {
+Red.prototype.neg = function neg(a) {
   var r = a.clone();
   r.sign = !r.sign;
   return r.iadd(this.m)._forceRed(this);
 };
 
-Redd.prototype.add = function add(a, b) {
+Red.prototype.add = function add(a, b) {
   this._verify2(a, b);
 
   var res = a.add(b);
@@ -2050,7 +2050,7 @@ Redd.prototype.add = function add(a, b) {
   return res._forceRed(this);
 };
 
-Redd.prototype.iadd = function iadd(a, b) {
+Red.prototype.iadd = function iadd(a, b) {
   this._verify2(a, b);
 
   var res = a.iadd(b);
@@ -2059,7 +2059,7 @@ Redd.prototype.iadd = function iadd(a, b) {
   return res;
 };
 
-Redd.prototype.sub = function sub(a, b) {
+Red.prototype.sub = function sub(a, b) {
   this._verify2(a, b);
 
   var res = a.sub(b);
@@ -2068,7 +2068,7 @@ Redd.prototype.sub = function sub(a, b) {
   return res._forceRed(this);
 };
 
-Redd.prototype.isub = function isub(a, b) {
+Red.prototype.isub = function isub(a, b) {
   this._verify2(a, b);
 
   var res = a.isub(b);
@@ -2077,30 +2077,30 @@ Redd.prototype.isub = function isub(a, b) {
   return res;
 };
 
-Redd.prototype.shl = function shl(a, num) {
+Red.prototype.shl = function shl(a, num) {
   this._verify1(a);
   return this.imod(a.shln(num));
 };
 
-Redd.prototype.imul = function imul(a, b) {
+Red.prototype.imul = function imul(a, b) {
   this._verify2(a, b);
   return this.imod(a.imul(b));
 };
 
-Redd.prototype.mul = function mul(a, b) {
+Red.prototype.mul = function mul(a, b) {
   this._verify2(a, b);
   return this.imod(a.mul(b));
 };
 
-Redd.prototype.isqr = function isqr(a) {
+Red.prototype.isqr = function isqr(a) {
   return this.imul(a, a);
 };
 
-Redd.prototype.sqr = function sqr(a) {
+Red.prototype.sqr = function sqr(a) {
   return this.mul(a, a);
 };
 
-Redd.prototype.sqrt = function sqrt(a) {
+Red.prototype.sqrt = function sqrt(a) {
   if (a.cmpn(0) === 0)
     return a.clone();
 
@@ -2156,7 +2156,7 @@ Redd.prototype.sqrt = function sqrt(a) {
   return r;
 };
 
-Redd.prototype.invm = function invm(a) {
+Red.prototype.invm = function invm(a) {
   var inv = a._invmp(this.m);
   if (inv.sign) {
     inv.sign = false;
@@ -2166,7 +2166,7 @@ Redd.prototype.invm = function invm(a) {
   }
 };
 
-Redd.prototype.pow = function pow(a, num) {
+Red.prototype.pow = function pow(a, num) {
   var w = [];
 
   if (num.cmpn(0) === 0)
@@ -2196,11 +2196,11 @@ Redd.prototype.pow = function pow(a, num) {
   return res;
 };
 
-Redd.prototype.convertTo = function convertTo(num) {
+Red.prototype.convertTo = function convertTo(num) {
   return num.clone();
 };
 
-Redd.prototype.convertFrom = function convertFrom(num) {
+Red.prototype.convertFrom = function convertFrom(num) {
   var res = num.clone();
   res.red = null;
   return res;
@@ -2215,7 +2215,7 @@ BN.mont = function mont(num) {
 };
 
 function Mont(m) {
-  Redd.call(this, m);
+  Red.call(this, m);
 
   this.shift = this.m.bitLength();
   if (this.shift % 26 !== 0)
@@ -2228,7 +2228,7 @@ function Mont(m) {
   this.minv.sign = true;
   this.minv = this.minv.mod(this.r);
 }
-inherits(Mont, Redd);
+inherits(Mont, Red);
 
 Mont.prototype.convertTo = function convertTo(num) {
   return this.imod(num.shln(this.shift));

@@ -1,0 +1,23 @@
+{
+    "name": "elliptic",
+    "main": "elliptic.js",
+    "version": "3.0.3",
+    "author": {
+        "name": "Fedor Indutny",
+        "email": "fedor@indutny.com"
+    },
+    "dependencies": {
+        "bn.js": "^2.0.0",
+        "brorand": "^1.0.1",
+        "hash.js": "^1.0.0",
+        "inherits": "^2.0.1"
+    },
+    "homepage": "https://github.com/indutny/elliptic",
+    "keywords": [
+      "EC",
+      "Elliptic",
+      "curve",
+      "Cryptography"
+    ],
+    "license": "MIT"
+}
