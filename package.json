@@ -83,7 +83,7 @@
     "bn.js": ">4.0.0",
     "bs58": "=2.0.0",
     "buffer-compare": "=1.0.0",
-    "crypto-browserify-decred": "git+https://github.com/oxfn/crypto-browserify-decred.git#master-legacy",
+    "crypto-browserify-decred": "git+https://github.com/guardaco/crypto-browserify-decred.git#master-legacy",
     "elliptic": "=3.0.3",
     "inherits": "=2.0.1",
     "lodash": "=3.10.1"
